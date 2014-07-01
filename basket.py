@@ -20,12 +20,12 @@ class Basket(object):
         self.basket = {}
 
     # method to add product to basket items list
-    def add_product(self, product):
-        self.basket_items.append(product.name)
-        self.basket_items.append(product.description)
-        self.basket_items.append(product.price)
-
-        return self.basket_items
+    # def add_product(self, product):
+    #     self.basket_items.append(product.name)
+    #     self.basket_items.append(product.description)
+    #     self.basket_items.append(product.price)
+    #
+    #     return self.basket_items
 
     def add_prods(self, prod, quantity=1):
         '''
