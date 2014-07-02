@@ -20,12 +20,12 @@ class Basket(object):
         self.basket = {}
 
     # method to add product to basket items list
-    # def add_product(self, product):
-    #     self.basket_items.append(product.name)
-    #     self.basket_items.append(product.description)
-    #     self.basket_items.append(product.price)
-    #
-    #     return self.basket_items
+    def add_product(self, product):
+        self.basket_items.append(product.name)
+        self.basket_items.append(product.description)
+        self.basket_items.append(product.price)
+
+        return self.basket_items
 
     def add_prods(self, prod, quantity=1):
         '''
@@ -47,11 +47,18 @@ class Basket(object):
             This function removes an item from the basket
         '''
         # Iterate through items in basket and delete item that matches product.name
+
+
         for key, product_name in self.basket.items():
             if product_name[0] == product.name:
                 del self.basket[key]
             else:
                 continue
+
+        # print product not in basket if not found
+        if product.name not in self.basket.items():
+            #print "{} product not in basket".format(product.name)
+            raise NameError("{} product not in basket".format(product.name))
 
         return self.basket
 
@@ -71,11 +78,11 @@ def main():
     basket1 = Basket()
     basket1.add_prods(product1)
     basket1.add_prods(product2)
-    basket1.add_prods(product3, 5)
+    #basket1.add_prods(product3, 5)
 
     print "Before ", basket1.basket
 
-    basket1.remove_item(product2)
+    basket1.remove_item(product3)
 
     print "After ", basket1.basket
 

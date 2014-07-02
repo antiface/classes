@@ -48,3 +48,10 @@ class Basket_tests(unittest.TestCase):
         self.basket.add_prods(self.product)
         result = self.basket.remove_item(self.product)
         self.assertEqual({}, result)
+
+    # create test to raise error when item is tried to be removed from empty basket
+    def error_when_item_removed_from_empty_basket_test(self):
+        # remove item from empty basket
+        #result = self.basket.remove_item(self.product)
+        # confirm exception error message is raised
+        self.assertRaises(NameError, self.basket.remove_item, self.product)
