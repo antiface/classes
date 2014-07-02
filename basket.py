@@ -55,7 +55,7 @@ class Basket(object):
             else:
                 continue
 
-        # print product not in basket if not found
+        # raise exception if product not found in basket
         if product.name not in self.basket.items():
             #print "{} product not in basket".format(product.name)
             raise NameError("{} product not in basket".format(product.name))
