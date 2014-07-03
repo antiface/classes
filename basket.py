@@ -63,9 +63,11 @@ class Basket(object):
         return self.basket
 
 
-    def update_item(self, product):
+    def update_item(self, product, quantity):
         '''
             This function updates the quantity field of a product in the basket
+            step 1 get the product item (key) - if self.basket[product.name] == product.name
+            step 2 update the quantity with new quantity - product.quantity = quantity
         '''
         pass
 
