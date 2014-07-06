@@ -13,7 +13,7 @@ class Product(object):
         '''
             This method displays the name, description and price of a product
         '''
-        return "Product: {0}, Description: {1}, Price: {2}".format(self.name, self.description,
+        return "Product: {0}, Description: {1}, Price: £{2:.2f}".format(self.name, self.description,
                                                                    self.price)
 
 class Basket(object):
@@ -25,12 +25,17 @@ class Basket(object):
     def add_product(self, product, quantity=1):
         '''
             This method adds a product to the basket dictionary of an instance of the Basket class
+            The default quantity is 1 unless specified
         '''
         # set the attribute product.name to variable to use as the dictionary
         product_name = product.name
+        # set the product quantity to the parameter quantity
+        product.quantity = quantity
         # set the product_name variable as the key for the product
         self.basket[product_name] = product
-        product.quantity = quantity
+
+        return "{} added to basket".format(product_name)
+
 
     def remove_product(self, product):
         '''
@@ -46,6 +51,8 @@ class Basket(object):
         else:
             raise NameError("No such product in basket")
 
+        return "{} removed from basket".format(product_name)
+
     def update_product_quantity(self, product, quantity):
         '''
             This method updates the quantity of a product in the dictionary of an instance of the Basket class
@@ -55,24 +62,28 @@ class Basket(object):
         product_name = product.name
         # if product name is matched then update product quantity in basket with passed quantity value
         if product_name in self.basket.keys():
+            previous_quantity = product.quantity
             product.quantity = quantity
+
+        return "{0} product quantity updated from {1} to {2}".format(product_name, previous_quantity, quantity)
 
 
 def main():
     product1 = Product("test", "testing", 4.50)
     product2 = Product("Lego", "Lego Toy", 3.50)
+    print "Product1 details - {}".format(product1.display_product_details())
     product3 = Product("Malta", "Malt drink", 5.00)
     basket = Basket()
-    basket.add_product(product1, 5)
-    basket.add_product(product2)
+    print basket.add_product(product1, 5)
+    print basket.add_product(product2, 2)
 
 
-    print "There are {} items in the basket".format(len(basket.basket))
+    print "There are {} item(s) in the basket".format(len(basket.basket))
 
-    #basket.remove_product(product1)
-    basket.update_product_quantity(product2, 23)
+    print basket.remove_product(product1)
+    print basket.update_product_quantity(product2, 8)
 
-    print "There are now {} items in the basket".format(len(basket.basket))
+    print "There are now {} item(s) in the basket".format(len(basket.basket))
 
     print basket.basket.items()
     for key, value in basket.basket.items():
