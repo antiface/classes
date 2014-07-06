@@ -78,29 +78,4 @@ class Basket(object):
         return "{0} product quantity updated from {1} to {2}".format(product_name, previous_quantity, quantity)
 
 
-def main():
-    product1 = Product("test", "testing", 4.50)
-    product2 = Product("Lego", "Lego Toy", 3.50)
-    print "Product1 details - {}".format(product1.display_product_details())
-    product3 = Product("Malta", "Malt drink", 5.00)
-    basket = Basket()
-    print basket.add_product(product1, "3")
-    print basket.add_product(product2, 2)
-    print basket.add_product(product3, 3)
 
-
-    print "There are {} item(s) in the basket".format(len(basket.basket))
-
-    print basket.remove_product(product1)
-    print basket.update_product_quantity(product2, 'rubbish')
-
-    print "There are now {} item(s) in the basket".format(len(basket.basket))
-
-    print basket.basket.items()
-    for key, value in basket.basket.items():
-         print "Product: {0}, Description: {1}, Price: £{2:.2f}, Quant: {3}".format(value.name, value.description,
-                                                                               value.price, value.quantity)
-
-
-if __name__ == "__main__":
-    main()
