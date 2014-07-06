@@ -26,6 +26,7 @@ class BasketTests(unittest.TestCase):
             self.assertEqual("Lego", item.name)
             self.assertEqual("Test Lego toy", item.description)
             self.assertEqual(4.55, item.price)
+            self.assertEqual(1, item.quantity)
 
     # create test to remove item from basket
     def remove_product_from_basket_test(self):
@@ -49,3 +50,15 @@ class BasketTests(unittest.TestCase):
             if self.product.name == item.name:
                 self.basket.update_product_quantity(self.product, 3)
                 self.assertEqual(3, item.quantity)
+
+    # create test to raise exception if non-integer is passed as quantity when adding product to basket
+    def add_product_to_basket_quantity_test(self):
+        # add product to basket and specify quantity which is a non-integer
+        self.assertRaises(ValueError, self.basket.add_product, self.product, "2")
+
+    # create test to raise exception if update quantity is not between 1-50
+    def update_product_quantity_value_test(self):
+        # first add product to basket
+        self.basket.add_product(self.product)
+        # raise value error if quantity specified is not between 1-50
+        self.assertRaises(ValueError, self.basket.update_product_quantity, self.product, "3")

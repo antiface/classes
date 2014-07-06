@@ -30,7 +30,11 @@ class Basket(object):
         # set the attribute product.name to variable to use as the dictionary
         product_name = product.name
         # set the product quantity to the parameter quantity
-        product.quantity = quantity
+        # if quantity not an integer, raise exception
+        if (isinstance(quantity, int)) and (0 < quantity <= 50):
+            product.quantity = quantity
+        else:
+            raise ValueError("Quantity is not a valid number, please enter a quantity between 1 - 50")
         # set the product_name variable as the key for the product
         self.basket[product_name] = product
 
@@ -61,9 +65,15 @@ class Basket(object):
         # Get the product name and match it to the product in the dictionary
         product_name = product.name
         # if product name is matched then update product quantity in basket with passed quantity value
+        # raise and error if quantity specified as update is a not an integer between 1-50
         if product_name in self.basket.keys():
             previous_quantity = product.quantity
-            product.quantity = quantity
+            # raise exception if non-integer between 1-50
+            if (isinstance(quantity, int) and (0 < quantity <= 50)):
+                product.quantity = quantity
+            else:
+                raise ValueError("Quantity is not a valid number, please enter a quantity between 1 - 50")
+
 
         return "{0} product quantity updated from {1} to {2}".format(product_name, previous_quantity, quantity)
 
@@ -74,14 +84,15 @@ def main():
     print "Product1 details - {}".format(product1.display_product_details())
     product3 = Product("Malta", "Malt drink", 5.00)
     basket = Basket()
-    print basket.add_product(product1, 5)
+    print basket.add_product(product1, "3")
     print basket.add_product(product2, 2)
+    print basket.add_product(product3, 3)
 
 
     print "There are {} item(s) in the basket".format(len(basket.basket))
 
     print basket.remove_product(product1)
-    print basket.update_product_quantity(product2, 8)
+    print basket.update_product_quantity(product2, 'rubbish')
 
     print "There are now {} item(s) in the basket".format(len(basket.basket))
 
@@ -90,7 +101,6 @@ def main():
          print "Product: {0}, Description: {1}, Price: £{2:.2f}, Quant: {3}".format(value.name, value.description,
                                                                                value.price, value.quantity)
 
-    #basket.remove_product(product3)
 
 if __name__ == "__main__":
     main()
